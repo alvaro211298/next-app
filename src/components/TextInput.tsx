@@ -6,19 +6,23 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import formSchema from "@/validations/formSchema";
+import formSchema, { FormSchema } from "@/validations/formSchema";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
-type FormSchema = z.infer<typeof formSchema>;
+type StringKeys<T> = Extract<
+  keyof T,
+  { [K in keyof T]: T[K] extends string ? K : never }[keyof T]
+>;
+type StringFormKeys = StringKeys<FormSchema>;
 
-type prop = {
+type InputProp = {
   form: UseFormReturn<z.infer<typeof formSchema>>;
-  name: keyof FormSchema;
+  name: StringFormKeys;
   title: string;
 };
 
-export default function voluntaryReport({ form, name, title }: prop) {
+export default function TextInput({ form, name, title }: InputProp) {
   return (
     <>
       <FormField
@@ -28,7 +32,7 @@ export default function voluntaryReport({ form, name, title }: prop) {
           <FormItem>
             <FormLabel>{title}</FormLabel>
             <FormControl>
-              <Input placeholder={title} {...field} />
+              <Input id={name} placeholder={title} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

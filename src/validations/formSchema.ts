@@ -2,8 +2,12 @@ import { z } from "zod";
 
 const formSchema = z.object({
   name: z.string(),
-  //.min(3, { message: "El nombre debe tener al menos 3 caracteres" })
-  //.max(50, { message: "El nombre no puede tener más de 50 caracteres" }),
+  last_name: z.string(),
+  phone: z.string(),
+  email: z.string().email().or(z.literal("")),
+  idDate: z
+    .date()
+    .refine((val) => !isNaN(val.getTime()), { message: "Invalid Date" }),
 });
 
 export type FormSchema = z.infer<typeof formSchema>;
