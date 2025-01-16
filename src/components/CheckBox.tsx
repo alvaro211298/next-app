@@ -8,7 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useFormContext } from "./FormContext";
+import { useFormContext } from "./context/FormContext";
 
 type CheckProp = {
   label: string;

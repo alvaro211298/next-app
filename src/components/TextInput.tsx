@@ -6,7 +6,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useFormContext } from "./FormContext";
+import { useFormContext } from "./context/FormContext";
 import { FormSchema } from "@/validations/formSchema";
 
 type StringKeys<T> = Extract<

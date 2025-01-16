@@ -13,9 +13,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import formSchema, { FormSchema } from "@/validations/formSchema";
-import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
+import { FormSchema } from "@/validations/formSchema";
+
+import { useFormContext } from "./context/FormContext";
 // ... other imports and component code
 
 type StringKeys<T> = Extract<
@@ -25,12 +25,12 @@ type StringKeys<T> = Extract<
 type StringFormKeys = StringKeys<FormSchema>;
 
 type InputProp = {
-  form: UseFormReturn<z.infer<typeof formSchema>>;
   name: StringFormKeys;
   title: string;
 };
 
-export default function SelectOption({ form, name, title }: InputProp) {
+export default function SelectOption({ name, title }: InputProp) {
+  const form = useFormContext();
   const options = [
     { value: "operations", label: "Operaciones" },
     { value: "maintenence", label: "Mantenimiento" },

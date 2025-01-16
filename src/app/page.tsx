@@ -1,3 +1,50 @@
+import { ColumnDef } from "@tanstack/react-table";
+import { MoreHorizontal } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Payment } from "./source_list/columns";
+
+export const columns: ColumnDef<Payment>[] = [
+  // ...
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const payment = row.original;
+
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(payment.id)}
+            >
+              Copy payment ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>View customer</DropdownMenuItem>
+            <DropdownMenuItem>View payment details</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+  },
+  // ...
+];
+/*
 "use client";
 import { DatePicker } from "@/components/DatePicker";
 import TextInput from "@/components/TextInput";
@@ -12,7 +59,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import SelectOption from "@/components/SelectOption";
-import { FormProvider } from "@/components/FormContext";
+import { FormProvider } from "@/components/context/FormContext";
 import TextArea from "@/components/TextArea";
 
 export default function Home() {
@@ -29,23 +76,6 @@ export default function Home() {
     },
   });
 
-  /*
-  const [isAnonymous, setIsAnonymous] = useState(form.getValues("anonymous"));
-
-  useEffect(() => {
-    const subscription = form.watch((value) => {
-      setIsAnonymous(value.anonymous);
-      if (value.anonymous) {
-        // Actualiza el estado de los campos opcionales solo si cambia a true
-        form.resetField("name");
-        form.resetField("last_name");
-        form.resetField("phone");
-        form.resetField("email");
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, [form]);
-*/
   const onSubmit = form.handleSubmit((values) => {
     console.log(values);
   });
@@ -53,11 +83,11 @@ export default function Home() {
   return (
     <>
       <FormProvider value={form}>
-        <Card className="mt-20">
+        <Card className="mt-20 ">
           <CardTitle className="text-center m-4 text-xl">
             Reporte Voluntario de Peligro
           </CardTitle>
-          <CardContent className="flex w-1/3">
+          <CardContent className="">
             <Form {...form}>
               <form onSubmit={onSubmit} className=" space-y-4">
                 <DatePicker
@@ -67,7 +97,7 @@ export default function Home() {
                 />
 
                 <SelectOption
-                  form={form}
+                  // form={form}
                   name="selectedArea"
                   title="Seleccionar Area"
                 />
@@ -102,3 +132,4 @@ export default function Home() {
     </>
   );
 }
+*/

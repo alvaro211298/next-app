@@ -23,12 +23,24 @@ const formSchema = z.object({
 export type FormSchema = z.infer<typeof formSchema>;
 
 export default formSchema;
-/*
-reportDate: z
-    .date()
-    .max(new Date(), {
-      message: "La fecha de nacimiento no puede ser en el futuro",
-    })
-    .nullable(), // Permite valores nulos (opcional)
-  identificationDate: z.date(),
-*/
+
+//Schemas para el formulario del análisis
+
+const analysisSchema = z.object({
+  probability: z.enum([
+    "frequent",
+    "occasional",
+    "remote",
+    "unlikely",
+    "highly_unlikely",
+  ]),
+  severity: z.enum([
+    "insignificant",
+    "minor",
+    "major",
+    "dangerous",
+    "catastrophic",
+  ]),
+});
+
+export type AnalysisSchema = z.infer<typeof analysisSchema>;
