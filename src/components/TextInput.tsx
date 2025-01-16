@@ -6,9 +6,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import formSchema, { FormSchema } from "@/validations/formSchema";
-import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
+import { useFormContext } from "./FormContext";
+import { FormSchema } from "@/validations/formSchema";
 
 type StringKeys<T> = Extract<
   keyof T,
@@ -17,12 +16,12 @@ type StringKeys<T> = Extract<
 type StringFormKeys = StringKeys<FormSchema>;
 
 type InputProp = {
-  form: UseFormReturn<z.infer<typeof formSchema>>;
   name: StringFormKeys;
   title: string;
 };
 
-export default function TextInput({ form, name, title }: InputProp) {
+export default function TextInput({ name, title }: InputProp) {
+  const form = useFormContext();
   return (
     <>
       <FormField

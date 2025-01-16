@@ -1,47 +1,19 @@
 "use client";
 import { DatePicker } from "@/components/DatePicker";
-//import { DatePicker } from "@/components/DatePicker";
 import TextInput from "@/components/TextInput";
 import { Button } from "@/components/ui/button";
-//import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import {
-  Form,
-  /*
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  */
-  //FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 
-import /*
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-
-*/
-"@/components/ui/popover";
-//import { cn } from "@/lib/utils";
-
-// import { Input } from "@/components/ui/input";
 import formSchema from "@/validations/formSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-//import { format } from "date-fns";
-//import { CalendarIcon } from "lucide-react";
+
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import SelectOption from "@/components/SelectOption";
+import { FormProvider } from "@/components/FormContext";
+import TextArea from "@/components/TextArea";
 
 export default function Home() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,50 +24,81 @@ export default function Home() {
       last_name: "",
       phone: "",
       email: "",
+      danger_place: "",
+      anonymous: false, // Añade este valor predeterminado
     },
   });
 
+  /*
+  const [isAnonymous, setIsAnonymous] = useState(form.getValues("anonymous"));
+
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      setIsAnonymous(value.anonymous);
+      if (value.anonymous) {
+        // Actualiza el estado de los campos opcionales solo si cambia a true
+        form.resetField("name");
+        form.resetField("last_name");
+        form.resetField("phone");
+        form.resetField("email");
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [form]);
+*/
   const onSubmit = form.handleSubmit((values) => {
     console.log(values);
-    const { idDate } = values;
-    console.log(idDate);
-    console.log("-", idDate.getMonth(), "-", idDate.getFullYear());
   });
 
   return (
     <>
-      <Card className="flex flex-col h-screen w-screen justify-center items-center">
-        <CardTitle className="text-center m-4 text-xl">
-          Reporte Voluntario de Peligro
-        </CardTitle>
-        <CardContent className="flex w-1/3">
-          <Form {...form}>
-            <form onSubmit={onSubmit} className="space-y-8">
-              <DatePicker
-                form={form}
-                name="idDate"
-                title="Fecha de identificacion"
-              />
-              <Select>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Theme" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="light">Operaciones</SelectItem>
-                  <SelectItem value="dark">Mantenimeinto</SelectItem>
-                  <SelectItem value="system">Plataforma</SelectItem>
-                </SelectContent>
-              </Select>
-              <TextInput form={form} name="name" title="Nombre" />
-              <TextInput form={form} name="last_name" title="Apellido" />
-              <TextInput form={form} name="phone" title="Telefono" />
-              <TextInput form={form} name="email" title="Correo" />
+      <FormProvider value={form}>
+        <Card className="mt-20">
+          <CardTitle className="text-center m-4 text-xl">
+            Reporte Voluntario de Peligro
+          </CardTitle>
+          <CardContent className="flex w-1/3">
+            <Form {...form}>
+              <form onSubmit={onSubmit} className=" space-y-4">
+                <DatePicker
+                  form={form}
+                  name="idDate"
+                  title="Fecha de identificacion"
+                />
 
-              <Button type="submit">Send</Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+                <SelectOption
+                  form={form}
+                  name="selectedArea"
+                  title="Seleccionar Area"
+                />
+
+                <TextInput
+                  name="danger_place"
+                  title="Lugar de identificación"
+                />
+
+                <TextArea
+                  name="description"
+                  title="Descripcion del problema"
+                  placeholder="Breve descripcion del problema"
+                />
+                <TextArea
+                  name="consequences"
+                  title="Consecuencias"
+                  placeholder="Si son varias consecuencias, separales con una coma (,) "
+                />
+
+                <p>Datos Opcionales</p>
+                <TextInput name="name" title="Nombre" />
+                <TextInput name="last_name" title="Apellido" />
+                <TextInput name="phone" title="Telefono" />
+                <TextInput name="email" title="Correo" />
+                <Button type="submit">Send</Button>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+      </FormProvider>
     </>
   );
 }

@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/popover";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -58,7 +57,7 @@ export function DatePicker({ form, name, title }: DateProp) {
                     {field.value ? (
                       format(field.value, "PPP")
                     ) : (
-                      <span>Pick a date</span>
+                      <span>Seleccionar Fecha</span>
                     )}
                     <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                   </Button>
@@ -73,9 +72,6 @@ export function DatePicker({ form, name, title }: DateProp) {
                 />
               </PopoverContent>
             </Popover>
-            <FormDescription>
-              Your date of birth is used to calculate your age.
-            </FormDescription>
             <FormMessage />
           </FormItem>
         )}

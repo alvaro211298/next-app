@@ -8,6 +8,16 @@ const formSchema = z.object({
   idDate: z
     .date()
     .refine((val) => !isNaN(val.getTime()), { message: "Invalid Date" }),
+
+  selectedArea: z.string().nonempty("Debes seleccionar una area"),
+  danger_place: z
+    .string()
+    .nonempty(
+      "Debes indicar el area donde de identificacion del peligro ej: Plataforma"
+    ),
+  description: z.string(),
+  consequences: z.string(),
+  anonymous: z.boolean().default(false).optional(),
 });
 
 export type FormSchema = z.infer<typeof formSchema>;

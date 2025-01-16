@@ -7,7 +7,9 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body>{children}</body>
+      <body className="flex flex-col justify-center items-center">
+        {children}
+      </body>
     </html>
   );
 }
