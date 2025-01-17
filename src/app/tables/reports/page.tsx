@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import {
-  ColumnDef,
   ColumnFiltersState,
   SortingState,
   VisibilityState,
@@ -13,20 +12,16 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -36,156 +31,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-// PARTE DEL PASO 1
-const data: Payment[] = [
-  {
-    id: "1",
-    date: new Date("2025-10-10"),
-    status: "Proceso",
-    area: "Control",
-    description: "Primer problema",
-  },
-  {
-    id: "2",
-    date: new Date("2025-10-10"),
-    status: "Cerrado",
-    area: "Control",
-    description: "Segundo problema",
-  },
-  {
-    id: "3",
-    date: new Date("2025-10-10"),
-    status: "Abierto",
-    area: "Mantenimiento",
-    description: "Tercer problema",
-  },
-  {
-    id: "4",
-    date: new Date("2025-10-10"),
-    status: "Cerrado",
-    area: "Control",
-    description: "Cuarto problema",
-  },
-  {
-    id: "5",
-    date: new Date("2025-10-10"),
-    status: "Abierto",
-    area: "Control",
-    description: "Quinto  problema",
-  },
-];
+import { columns } from "./columns";
+import { data } from "./data-table";
 
-// PART 1
-export type Payment = {
-  id: string;
-  date: Date;
-  status: "Abierto" | "Proceso" | "Cerrado";
-  area: "Mantenimiento" | "Operaciones" | "Control" | "Calidad";
-  description: string;
-};
-
-//EL APARTADO QUE CONFORMA LAS COLUMNAS DE LA TABLA
-
-export const columns: ColumnDef<Payment>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "date",
-    header: () => <div className="text-left">Fecha</div>,
-    cell: ({ row }) => {
-      const date = new Date(row.getValue("date"));
-      const formatted = date.toLocaleDateString("en-ES", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-
-      return <div className="text-left font-medium">{formatted}</div>;
-    },
-  },
-
-  {
-    accessorKey: "area",
-    header: "Area de identificacion",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("area")}</div>,
-  },
-
-  {
-    accessorKey: "description",
-    header: "Descripcion",
-    cell: ({ row }) => (
-      <div className="capitalize ">{row.getValue("description")}</div>
-    ),
-  },
-  {
-    accessorKey: "status",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Estado
-          <ArrowUpDown />
-        </Button>
-      );
-    },
-    cell: ({ row }) => (
-      <div className="lowercase text-center">{row.getValue("status")}</div>
-    ),
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
-];
-
-//  3 Y ULTIMO  APARTADO QUE CONTROLA TODA LA INFORMACION
 export default function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -195,7 +43,7 @@ export default function DataTableDemo() {
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const table = useReactTable<Payment>({
+  const table = useReactTable({
     data,
     columns,
     onSortingChange: setSorting,

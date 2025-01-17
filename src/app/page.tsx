@@ -1,3 +1,4 @@
+/*
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
@@ -44,7 +45,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
   // ...
 ];
-/*
+*/
 "use client";
 import { DatePicker } from "@/components/DatePicker";
 import TextInput from "@/components/TextInput";
@@ -132,4 +133,3 @@ export default function Home() {
     </>
   );
 }
-*/
