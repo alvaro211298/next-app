@@ -10,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 
 // Definición del tipo Payment
 export type Payment = {
@@ -72,7 +71,7 @@ export const columns: ColumnDef<Payment>[] = [
     header: () => <div className="text-left">Fecha del análisis</div>,
     cell: ({ row }) => {
       const date = new Date(row.getValue("analysis_date"));
-      const formatted = date.toLocaleDateString("ES", {
+      const formatted = date.toLocaleDateString("en-ES", {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -104,9 +103,7 @@ export const columns: ColumnDef<Payment>[] = [
               Copy payment ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href="/tables/identification">No enviar</Link>
-            </DropdownMenuItem>
+            <DropdownMenuItem>View customer</DropdownMenuItem>
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
