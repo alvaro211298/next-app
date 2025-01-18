@@ -35,6 +35,16 @@ import { columns } from "./columns";
 import { data } from "./data-table";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import FormComponent from "@/components/FormComponent";
+import VoluntaryForm from "@/components/VoluntaryForm";
 
 export default function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -180,10 +190,19 @@ export default function DataTableDemo() {
           </div>
         </div>
         <Card className="flex">
-          <Button className="ml-auto">
-            {" "}
-            <Link href={"/"}>Agregar</Link>
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline">Agregar</Button>
+            </DialogTrigger>
+            <DialogContent className="flex flex-col w-1/4 h-full max-w-screen max-h-screen">
+              <DialogHeader>
+                <DialogTitle></DialogTitle>
+                <DialogDescription></DialogDescription>
+              </DialogHeader>
+
+              <VoluntaryForm />
+            </DialogContent>
+          </Dialog>
         </Card>
       </div>
     </>

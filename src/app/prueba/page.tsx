@@ -1,4 +1,3 @@
-//import FormComponent from "@/components/FormComponent";
 import FormComponent from "@/components/FormComponent";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +19,6 @@ export default function DialogDemo() {
         <DialogTrigger asChild>
           <Button variant="outline">Edit Profile</Button>
         </DialogTrigger>
-
         <FormComponent />
       </Dialog>
     </>
