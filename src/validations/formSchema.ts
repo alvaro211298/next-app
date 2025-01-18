@@ -8,6 +8,9 @@ const formSchema = z.object({
   idDate: z
     .date()
     .refine((val) => !isNaN(val.getTime()), { message: "Invalid Date" }),
+  report_date: z
+    .date()
+    .refine((val) => !isNaN(val.getTime()), { message: "Invalid Date" }),
 
   selectedArea: z.string().nonempty("Debes seleccionar una area"),
   danger_place: z
