@@ -62,7 +62,6 @@ import { z } from "zod";
 import SelectOption from "@/components/SelectOption";
 import { FormProvider } from "@/components/context/FormContext";
 import TextArea from "@/components/TextArea";
-import Link from "next/link";
 
 export default function Home() {
   const form = useForm<z.infer<typeof formSchema>>({
