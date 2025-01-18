@@ -14,7 +14,6 @@ import { z } from "zod";
 import SelectOption from "@/components/SelectOption";
 import { FormProvider } from "@/components/context/FormContext";
 import TextArea from "@/components/TextArea";
-import { ScrollArea } from "./ui/scroll-area";
 
 export default function VoluntaryForm() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -38,16 +37,21 @@ export default function VoluntaryForm() {
     <>
       <FormProvider value={form}>
         <Card className=" flex-shrink overflow-auto ">
-          <CardTitle className="m-2  text-center">
+          <CardTitle className="m-2 text-lg text-center">
             Reporte Voluntario de Peligro
           </CardTitle>
-          <CardContent className="">
+          <CardContent className="mt-10">
             <Form {...form}>
               <form onSubmit={onSubmit} className="space-y-4">
                 <DatePicker
                   form={form}
                   name="idDate"
                   title="Fecha de identificacion"
+                />
+                <DatePicker
+                  form={form}
+                  name="report_date"
+                  title="Fecha del reporte"
                 />
 
                 <SelectOption
