@@ -25,6 +25,7 @@ export default function VoluntaryForm() {
       phone: "",
       email: "",
       danger_place: "",
+      report_date: new Date(),
       anonymous: false, // Añade este valor predeterminado
     },
   });
