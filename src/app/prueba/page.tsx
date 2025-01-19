@@ -1,26 +1,65 @@
-import FormComponent from "@/components/FormComponent";
-import { Button } from "@/components/ui/button";
+"use client";
+
+import React, { JSX, useState } from "react";
 import {
   Dialog,
-  DialogTrigger /*
-  DialogDescription,
-  DialogFooter,
+  DialogContent,
   DialogHeader,
-  DialogTitle,*/,
+  DialogTitle,
 } from "@/components/ui/dialog";
-//import { Input } from "@/components/ui/input";
-//import { Label } from "@/components/ui/label";
-import React from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import VoluntaryForm from "@/components/VoluntaryForm";
 
-export default function DialogDemo() {
+const DownMenu = () => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogContent, setDialogContent] = useState<JSX.Element>();
+
+  const handleOpenDialog = (content: JSX.Element) => {
+    setDialogContent(content);
+    setDialogOpen(true);
+  };
+
   return (
     <>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="outline">Edit Profile</Button>
-        </DialogTrigger>
-        <FormComponent />
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => handleOpenDialog(<VoluntaryForm />)}>
+            Aceptar reporte
+          </DropdownMenuItem>
+          <DropdownMenuItem>Redirigir reporte</DropdownMenuItem>
+          <DropdownMenuItem>Eliminar reporte</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="h-full bg-blue-600">
+          <DialogHeader>
+            <DialogTitle>
+              {typeof dialogContent === "string" ? dialogContent : "Formulario"}
+            </DialogTitle>
+          </DialogHeader>
+          {typeof dialogContent !== "string" && dialogContent}
+        </DialogContent>
       </Dialog>
     </>
   );
-}
+};
+
+export default DownMenu;
