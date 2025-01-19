@@ -4,6 +4,7 @@ import { Payment } from "./columns";
 export const data: Payment[] = [
   {
     id: "1",
+    code: "RVP-001",
     date: new Date("2025-10-10"),
     status: "Proceso",
     area: "Control",
@@ -12,6 +13,7 @@ export const data: Payment[] = [
   },
   {
     id: "2",
+    code: "RVP-002",
     date: new Date("2025-10-10"),
     status: "Cerrado",
     area: "Control",
@@ -20,6 +22,7 @@ export const data: Payment[] = [
   },
   {
     id: "3",
+    code: "RVP-003",
     date: new Date("2025-10-10"),
     status: "Abierto",
     area: "Mantenimiento",
@@ -28,6 +31,7 @@ export const data: Payment[] = [
   },
   {
     id: "4",
+    code: "RSO-001",
     date: new Date("2025-10-10"),
     status: "Cerrado",
     area: "Control",
@@ -36,6 +40,7 @@ export const data: Payment[] = [
   },
   {
     id: "5",
+    code: "RVP-004",
     date: new Date("2025-10-10"),
     status: "Abierto",
     area: "Control",

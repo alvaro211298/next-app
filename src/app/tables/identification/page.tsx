@@ -25,7 +25,6 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -34,7 +33,6 @@ import {
 
 import { columns } from "./columns";
 import { data } from "./data-table";
-import { CardTitle } from "@/components/ui/card";
 
 export default function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);

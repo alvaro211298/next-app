@@ -28,7 +28,7 @@ export type FormSchema = z.infer<typeof formSchema>;
 export default formSchema;
 
 //Schemas para el formulario del análisis
-
+/*
 const analysisSchema = z.object({
   probability: z.enum([
     "frequent",
@@ -47,3 +47,4 @@ const analysisSchema = z.object({
 });
 
 export type AnalysisSchema = z.infer<typeof analysisSchema>;
+*/

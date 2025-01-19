@@ -1,20 +1,20 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import VoluntaryForm from "@/components/VoluntaryForm";
 
 // Definición del tipo Payment
 export type Payment = {
   id: string;
+  code: string;
   date: Date;
   status: "Abierto" | "Proceso" | "Cerrado";
   area: "Mantenimiento" | "Operaciones" | "Control" | "Calidad";
@@ -22,29 +22,15 @@ export type Payment = {
   description: string;
 };
 
+const handleClick = () => {
+  <VoluntaryForm />;
+};
 // Definición de las columnas de la tabla
 export const columns: ColumnDef<Payment>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
+    accessorKey: "code",
+    header: "Código de reporte",
+    cell: ({ row }) => <div className="capitalize">{row.getValue("code")}</div>,
   },
   {
     accessorKey: "date",
@@ -112,9 +98,7 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
+            <DropdownMenuItem onClick={handleClick}>
               Copy payment ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />

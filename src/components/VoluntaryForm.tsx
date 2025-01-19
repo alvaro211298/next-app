@@ -18,7 +18,6 @@ import TextArea from "@/components/TextArea";
 export default function VoluntaryForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-
     defaultValues: {
       name: "",
       last_name: "",
@@ -37,7 +36,7 @@ export default function VoluntaryForm() {
   return (
     <>
       <FormProvider value={form}>
-        <Card className=" flex-shrink overflow-auto ">
+        <Card className=" flex-shrink overflow-auto bg-orange-500">
           <CardTitle className="m-2 text-lg text-center">
             Reporte Voluntario de Peligro
           </CardTitle>
