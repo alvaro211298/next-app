@@ -12,16 +12,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import {
   Table,
   TableBody,
@@ -33,16 +27,6 @@ import {
 
 import { columns } from "./columns";
 import { data } from "./data-table";
-import { Card } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import VoluntaryForm from "@/components/VoluntaryForm";
 
 export default function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -86,32 +70,6 @@ export default function DataTableDemo() {
             }
             className="max-w-sm"
           />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Columns <ChevronDown />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
-            </DropdownMenuContent>
-          </DropdownMenu>
         </div>
         <div className="rounded-md border">
           <Table>
@@ -187,21 +145,6 @@ export default function DataTableDemo() {
             </Button>
           </div>
         </div>
-        <Card className="flex">
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline">Agregar</Button>
-            </DialogTrigger>
-            <DialogContent className="flex flex-col w-1/4 h-full max-w-screen max-h-screen">
-              <DialogHeader>
-                <DialogTitle></DialogTitle>
-                <DialogDescription></DialogDescription>
-              </DialogHeader>
-
-              <VoluntaryForm />
-            </DialogContent>
-          </Dialog>
-        </Card>
       </div>
     </>
   );
