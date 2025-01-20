@@ -1,11 +1,11 @@
 import { z } from "zod";
 
-const formSchema = z.object({
+const voluntarySchema = z.object({
   name: z.string(),
   last_name: z.string(),
   phone: z.string(),
   email: z.string().email().or(z.literal("")),
-  idDate: z
+  identification_date: z
     .date()
     .refine((val) => !isNaN(val.getTime()), { message: "Invalid Date" }),
   report_date: z
@@ -23,9 +23,9 @@ const formSchema = z.object({
   anonymous: z.boolean().default(false).optional(),
 });
 
-export type FormSchema = z.infer<typeof formSchema>;
+export type VoluntarySchema = z.infer<typeof voluntarySchema>;
 
-export default formSchema;
+export default voluntarySchema;
 
 //Schemas para el formulario del análisis
 /*

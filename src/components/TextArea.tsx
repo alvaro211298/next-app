@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormContext } from "./context/FormContext";
-import { FormSchema } from "@/validations/formSchema";
+import { FormSchema } from "@/validations/voluntarySchema";
 
 type StringKeys<T> = Extract<
   keyof T,

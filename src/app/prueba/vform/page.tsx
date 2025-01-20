@@ -1,10 +1,10 @@
 "use client";
-import RedirectionForm from "@/components/RedirectionForm";
+import VoluntaryForm from "@/components/VoluntaryForm";
 
 export default function show() {
   return (
     <>
-      <RedirectionForm />
+      <VoluntaryForm />
     </>
   );
 }

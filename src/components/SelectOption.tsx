@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FormSchema } from "@/validations/formSchema";
+import { FormSchema } from "@/validations/voluntarySchema";
 
 import { useFormContext } from "./context/FormContext";
 // ... other imports and component code
