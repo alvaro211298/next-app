@@ -12,6 +12,7 @@ import { DefaultValues } from "react-hook-form";
 import { FormProvider, useFormContext } from "./context/GenericFormContex";
 import SelectOption from "./SelectOption";
 import TextArea from "./TextArea";
+import { useState } from "react";
 
 const defaultValues: DefaultValues<VoluntarySchema> = {
   name: "",
@@ -33,6 +34,8 @@ export default function RedirectionForm() {
 }
 
 function FormComponent() {
+  const [showOptionalFields, setShowOptionalFields] = useState(true);
+
   const form = useFormContext<VoluntarySchema>();
 
   const onSubmit = form.handleSubmit((values) => {
@@ -67,7 +70,6 @@ function FormComponent() {
               name="danger_place"
               title="Lugar donde se identifico"
             />
-
             <TextArea
               form={form}
               name="description"
@@ -81,15 +83,28 @@ function FormComponent() {
               placeholder="Si son varias consecuencias, separar por una coma (,)"
             />
             <TextInput form={form} name="name" title="Nombre" />
-
-            <TextInput
-              form={form}
-              name="last_name"
-              title="Apellido"
-            ></TextInput>
-            <TextInput form={form} name="phone" title="Telefono" />
-            <TextInput form={form} name="email" title="Correo electronico" />
-
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={showOptionalFields}
+                  onChange={() => setShowOptionalFields(!showOptionalFields)}
+                />
+                ¿Desea realizar su reporte de forma anonima?
+              </label>
+            </div>
+            {showOptionalFields && (
+              <>
+                <TextInput form={form} name="name" title="Nombre" />
+                <TextInput form={form} name="last_name" title="Apellido" />
+                <TextInput form={form} name="phone" title="Teléfono" />
+                <TextInput
+                  form={form}
+                  name="email"
+                  title="Correo electrónico"
+                />
+              </>
+            )}
             <Button className="w-full" type="submit">
               Enviar
             </Button>
