@@ -57,8 +57,8 @@ function FormComponent() {
 
             <DatePicker
               form={form}
-              name="departament"
-              title="Rediccion al departamento de:"
+              name="redirection_date"
+              title="Rediccionar al departamento de: "
             />
 
             <Button className="w-full" type="submit">
