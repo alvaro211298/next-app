@@ -8,23 +8,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { useFormContext } from "./context/FormContext";
-import { FormSchema } from "@/validations/voluntarySchema";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 
-type StringKeys<T> = Extract<
-  keyof T,
-  { [K in keyof T]: T[K] extends string ? K : never }[keyof T]
->;
-type StringFormKeys = StringKeys<FormSchema>;
-
-type InputProp = {
-  name: StringFormKeys;
+type TextAreaProp<T extends FieldValues> = {
+  form: UseFormReturn<T>;
+  name: Path<T>; // Cambia a Path<T>
   title: string;
   placeholder: string;
 };
 
-export default function TextArea({ name, title, placeholder }: InputProp) {
-  const form = useFormContext();
+export default function TextArea<T extends FieldValues>({
+  form,
+  name,
+  title,
+  placeholder,
+}: TextAreaProp<T>) {
   return (
     <FormField
       control={form.control}

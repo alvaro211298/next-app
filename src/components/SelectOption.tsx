@@ -13,24 +13,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FormSchema } from "@/validations/voluntarySchema";
 
-import { useFormContext } from "./context/FormContext";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 // ... other imports and component code
 
-type StringKeys<T> = Extract<
-  keyof T,
-  { [K in keyof T]: T[K] extends string ? K : never }[keyof T]
->;
-type StringFormKeys = StringKeys<FormSchema>;
-
-type InputProp = {
-  name: StringFormKeys;
+type SelectProp<T extends FieldValues> = {
+  form: UseFormReturn<T>;
+  name: Path<T>; // Cambia a Path<T>
   title: string;
 };
-
-export default function SelectOption({ name, title }: InputProp) {
-  const form = useFormContext();
+// EN EL FUTURO DEBO AGREGAR COMO PROP UN OBJETO CON VALUE - LABEL
+// PAR HACER DINAMICO Y REUTILIZABLE EL COMPONENTE SELECT OPTION
+export default function SelectOption<T extends FieldValues>({
+  form,
+  name,
+  title,
+}: SelectProp<T>) {
   const options = [
     { value: "operations", label: "Operaciones" },
     { value: "maintenence", label: "Mantenimiento" },

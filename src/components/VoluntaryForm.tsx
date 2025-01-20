@@ -10,6 +10,8 @@ import voluntarySchema, {
 } from "@/validations/voluntarySchema";
 import { DefaultValues } from "react-hook-form";
 import { FormProvider, useFormContext } from "./context/GenericFormContex";
+import SelectOption from "./SelectOption";
+import TextArea from "./TextArea";
 
 const defaultValues: DefaultValues<VoluntarySchema> = {
   name: "",
@@ -55,18 +57,38 @@ function FormComponent() {
               name="report_date"
               title="Fecha del reporte"
             />
-            <TextInput form={form} name="name" title="Nombre"></TextInput>
+            <SelectOption
+              form={form}
+              name="selectedArea"
+              title="Area afectada"
+            />
+            <TextInput
+              form={form}
+              name="danger_place"
+              title="Lugar donde se identifico"
+            />
+
+            <TextArea
+              form={form}
+              name="description"
+              title="Descripcion del problema"
+              placeholder="Breve descripcion del problema"
+            />
+            <TextArea
+              form={form}
+              name="consequences"
+              title="Posible consecuencias segun su criterio"
+              placeholder="Si son varias consecuencias, separar por una coma (,)"
+            />
+            <TextInput form={form} name="name" title="Nombre" />
+
             <TextInput
               form={form}
               name="last_name"
               title="Apellido"
             ></TextInput>
-            <TextInput form={form} name="phone" title="Telefono"></TextInput>
-            <TextInput
-              form={form}
-              name="email"
-              title="Correo electronico"
-            ></TextInput>
+            <TextInput form={form} name="phone" title="Telefono" />
+            <TextInput form={form} name="email" title="Correo electronico" />
 
             <Button className="w-full" type="submit">
               Enviar
