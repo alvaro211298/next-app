@@ -8,19 +8,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useFormContext } from "./context/FormContext";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 
-type CheckProp = {
+type CheckProp<T extends FieldValues> = {
+  form: UseFormReturn<T>;
+  name: Path<T>;
   label: string;
-  description?: string;
+  description: string;
 };
 
-export default function CheckBox({ label, description }: CheckProp) {
-  const form = useFormContext();
+export default function CheckBox<T extends FieldValues>({
+  form,
+  name,
+  label,
+  description,
+}: CheckProp<T>) {
   return (
     <FormField
       control={form.control}
-      name="anonymous"
+      name={name}
       render={({ field }) => (
         <FormItem className="flex items-center space-x-2 rounded-md border p-4">
           <FormControl>
