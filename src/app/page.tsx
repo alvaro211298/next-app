@@ -81,55 +81,5 @@ export default function Home() {
     console.log(values);
   });
 
-  return (
-    <>
-      <FormProvider value={form}>
-        <Card className="mt-20 ">
-          <CardTitle className="text-center m-4 text-xl">
-            Reporte Voluntario de Peligro
-          </CardTitle>
-          <CardContent className="">
-            <Form {...form}>
-              <form onSubmit={onSubmit} className=" space-y-4">
-                <DatePicker
-                  form={form}
-                  name="idDate"
-                  title="Fecha de identificacion"
-                />
-
-                <SelectOption
-                  // form={form}
-                  name="selectedArea"
-                  title="Seleccionar Area"
-                />
-
-                <TextInput
-                  name="danger_place"
-                  title="Lugar de identificación"
-                />
-
-                <TextArea
-                  name="description"
-                  title="Descripcion del problema"
-                  placeholder="Breve descripcion del problema"
-                />
-                <TextArea
-                  name="consequences"
-                  title="Consecuencias"
-                  placeholder="Si son varias consecuencias, separales con una coma (,) "
-                />
-
-                <p>Datos Opcionales</p>
-                <TextInput name="name" title="Nombre" />
-                <TextInput name="last_name" title="Apellido" />
-                <TextInput name="phone" title="Telefono" />
-                <TextInput name="email" title="Correo" />
-                <Button type="submit">Send</Button>
-              </form>
-            </Form>
-          </CardContent>
-        </Card>
-      </FormProvider>
-    </>
-  );
+  return <>Home</>;
 }

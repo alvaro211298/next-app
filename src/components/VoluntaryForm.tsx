@@ -93,7 +93,7 @@ function FormComponent() {
                 ¿Desea realizar su reporte de forma anonima?
               </label>
             </div>
-            {showOptionalFields && (
+            {!showOptionalFields && (
               <>
                 <TextInput form={form} name="name" title="Nombre" />
                 <TextInput form={form} name="last_name" title="Apellido" />
