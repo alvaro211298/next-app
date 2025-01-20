@@ -1,10 +1,11 @@
 "use client";
-import VoluntaryForm from "@/components/VoluntaryForm";
+
+import MandatoryForm from "@/components/MandatoryForm";
 
 export default function show() {
   return (
     <>
-      <VoluntaryForm />
+      <MandatoryForm />
     </>
   );
 }

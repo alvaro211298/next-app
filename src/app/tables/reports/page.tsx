@@ -192,7 +192,7 @@ export default function DataTableDemo() {
             <DialogTrigger asChild>
               <Button variant="outline">Agregar</Button>
             </DialogTrigger>
-            <DialogContent className="flex flex-col w-1/4 h-full max-w-screen max-h-screen">
+            <DialogContent className="flex flex-col h-full w-1/3 min-h-80">
               <DialogHeader>
                 <DialogTitle></DialogTitle>
                 <DialogDescription></DialogDescription>
