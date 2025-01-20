@@ -22,7 +22,7 @@ const defaultValues: DefaultValues<VoluntarySchema> = {
   identification_date: new Date(),
 };
 
-export default function RedirectionForm() {
+export default function VoluntayForm() {
   return (
     <FormProvider<VoluntarySchema>
       schema={voluntarySchema}
@@ -34,7 +34,7 @@ export default function RedirectionForm() {
 }
 
 function FormComponent() {
-  const [showOptionalFields, setShowOptionalFields] = useState(true);
+  const [showOptionalFields, setShowOptionalFields] = useState(false);
 
   const form = useFormContext<VoluntarySchema>();
 
@@ -43,7 +43,7 @@ function FormComponent() {
   });
 
   return (
-    <Card className="flex-shrink overflow-auto bg-orange-500">
+    <Card className="flex-shrink overflow-auto bg-orange-500 h-full">
       <CardTitle className=" m-2 text-lg text-center">
         Formulario de reporte voluntario
       </CardTitle>
