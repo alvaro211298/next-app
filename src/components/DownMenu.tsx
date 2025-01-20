@@ -18,15 +18,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-//import VoluntaryForm from "./VoluntaryForm";
-//import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { JSX, useState } from "react";
+import RedirectionForm from "./RedirectionForm";
 
 export default function DownMenu() {
-  //const [form, setForm] = useState(false);
-  /*
-  const handleOpenForm = () => {
-    setForm(true);
-  };*/
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogContent, setDialogContent] = useState<JSX.Element>();
+
+  const handleOpenDialog = (content: JSX.Element) => {
+    setDialogContent(content);
+    setDialogOpen(true);
+  };
+
   return (
     <>
       <DropdownMenu>
@@ -40,10 +44,25 @@ export default function DownMenu() {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Aceptar reporte</DropdownMenuItem>
-          <DropdownMenuItem>Redirigir reporte</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => handleOpenDialog(<RedirectionForm />)}
+          >
+            Redirigir reporte
+          </DropdownMenuItem>
           <DropdownMenuItem>Eliminar reporte</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="min-h-80 bg-blue-600">
+          <DialogHeader>
+            <DialogTitle>
+              {typeof dialogContent === "string" ? dialogContent : "Formulario"}
+            </DialogTitle>
+          </DialogHeader>
+          {typeof dialogContent !== "string" && dialogContent}
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
