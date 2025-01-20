@@ -6,22 +6,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useFormContext } from "./context/FormContext";
-import { FormSchema } from "@/validations/formSchema";
 
-type StringKeys<T> = Extract<
-  keyof T,
-  { [K in keyof T]: T[K] extends string ? K : never }[keyof T]
->;
-type StringFormKeys = StringKeys<FormSchema>;
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 
-type InputProp = {
-  name: StringFormKeys;
+type InputProp<T extends FieldValues> = {
+  form: UseFormReturn<T>;
+  name: Path<T>; // Cambia a Path<T>
   title: string;
 };
 
-export default function TextInput({ name, title }: InputProp) {
-  const form = useFormContext();
+export default function TextInput<T extends FieldValues>({
+  form,
+  name,
+  title,
+}: InputProp<T>) {
   return (
     <>
       <FormField

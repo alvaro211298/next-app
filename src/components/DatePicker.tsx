@@ -19,23 +19,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import formSchema, { FormSchema } from "@/validations/formSchema";
-import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
+import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 
-type DateKeys<T> = Extract<
-  keyof T,
-  { [K in keyof T]: T[K] extends Date ? K : never }[keyof T]
->;
-type DateFormKeys = DateKeys<FormSchema>;
-
-type DateProp = {
-  form: UseFormReturn<z.infer<typeof formSchema>>;
-  name: DateFormKeys;
+type DateProp<T extends FieldValues> = {
+  form: UseFormReturn<T>;
+  name: Path<T>; // Cambia a Path<T>
   title: string;
 };
 
-export function DatePicker({ form, name, title }: DateProp) {
+export function DatePicker<T extends FieldValues>({
+  form,
+  name,
+  title,
+}: DateProp<T>) {
   return (
     <>
       <FormField
