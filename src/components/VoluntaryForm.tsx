@@ -11,7 +11,13 @@ import voluntarySchema, {
 import { DefaultValues } from "react-hook-form";
 import { FormProvider, useFormContext } from "./context/GenericFormContex";
 
-const defaultValues: DefaultValues<VoluntarySchema> = {};
+const defaultValues: DefaultValues<VoluntarySchema> = {
+  name: "",
+  last_name: "",
+  phone: "",
+  report_date: new Date(),
+  identification_date: new Date(),
+};
 
 export default function RedirectionForm() {
   return (
@@ -39,18 +45,28 @@ function FormComponent() {
       <CardContent className="mt-10">
         <Form {...form}>
           <form onSubmit={onSubmit} className="space-y-4">
+            <DatePicker
+              form={form}
+              name="identification_date"
+              title="Fecha de identificacion"
+            />
+            <DatePicker
+              form={form}
+              name="report_date"
+              title="Fecha del reporte"
+            />
             <TextInput form={form} name="name" title="Nombre"></TextInput>
             <TextInput
               form={form}
               name="last_name"
               title="Apellido"
             ></TextInput>
-
-            <DatePicker
+            <TextInput form={form} name="phone" title="Telefono"></TextInput>
+            <TextInput
               form={form}
-              name="identification_date"
-              title="Fecha de identificacion"
-            />
+              name="email"
+              title="Correo electronico"
+            ></TextInput>
 
             <Button className="w-full" type="submit">
               Enviar

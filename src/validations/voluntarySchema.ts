@@ -1,10 +1,6 @@
 import { z } from "zod";
 
 const voluntarySchema = z.object({
-  name: z.string(),
-  last_name: z.string(),
-  phone: z.string(),
-  email: z.string().email().or(z.literal("")),
   identification_date: z
     .date()
     .refine((val) => !isNaN(val.getTime()), { message: "Invalid Date" }),
@@ -21,6 +17,10 @@ const voluntarySchema = z.object({
   description: z.string(),
   consequences: z.string(),
   anonymous: z.boolean().default(false).optional(),
+  name: z.string(),
+  last_name: z.string(),
+  phone: z.string(),
+  email: z.string().email().or(z.literal("")),
 });
 
 export type VoluntarySchema = z.infer<typeof voluntarySchema>;
