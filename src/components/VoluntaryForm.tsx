@@ -54,11 +54,7 @@ export default function VoluntaryForm() {
                   title="Fecha del reporte"
                 />
 
-                <SelectOption
-                  // form={form}
-                  name="selectedArea"
-                  title="Seleccionar Area"
-                />
+                <SelectOption name="selectedArea" title="Seleccionar Area" />
 
                 <TextInput
                   name="danger_place"
