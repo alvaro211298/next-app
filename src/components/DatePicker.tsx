@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { format } from "date-fns";
+import { es } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -51,7 +52,7 @@ export function DatePicker<T extends FieldValues>({
                     )}
                   >
                     {field.value ? (
-                      format(field.value, "PPP")
+                      format(field.value, "PPP", { locale: es })
                     ) : (
                       <span>Seleccionar Fecha</span>
                     )}
