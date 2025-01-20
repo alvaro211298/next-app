@@ -51,7 +51,7 @@ const DownMenu = () => {
       </DropdownMenu>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="h-full bg-blue-600">
+        <DialogContent className="min-h-80 bg-blue-600">
           <DialogHeader>
             <DialogTitle>
               {typeof dialogContent === "string" ? dialogContent : "Formulario"}
