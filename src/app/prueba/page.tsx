@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import VoluntaryForm from "@/components/VoluntaryForm";
+import RedirectionForm from "@/components/RedirectionForm";
 
 const DownMenu = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -40,7 +40,9 @@ const DownMenu = () => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => handleOpenDialog(<VoluntaryForm />)}>
+          <DropdownMenuItem
+            onClick={() => handleOpenDialog(<RedirectionForm />)}
+          >
             Aceptar reporte
           </DropdownMenuItem>
           <DropdownMenuItem>Redirigir reporte</DropdownMenuItem>
