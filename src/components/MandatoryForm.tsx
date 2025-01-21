@@ -13,6 +13,7 @@ import mandatorySchema, {
 } from "@/validations/MandatorySchema";
 import TextInput from "./TextInput";
 import { TimePicker } from "./TimePicker";
+import CheckBox from "./CheckBox";
 
 const defaultValues: DefaultValues<MandatorySchema> = {
   report_date: new Date(),
@@ -41,13 +42,32 @@ export default function MandatoryForm() {
 
 function FormComponent() {
   const form = useFormContext<MandatorySchema>();
-
+  const optionsList = [
+    "La aereonave aterriza quedándose solo con el combustible de reserva o menos",
+    "Incursion en pista o calle de rodaje ( RUNAWAY INCURSION-RI)",
+    "Aproximacion no estabilizada por debajo de los 500 pies VRF o 1000 PIES IRF",
+    "Desprezurizacion",
+    "Salida de pista () RUNAWAY INCURSION-RE",
+    "Derrame de combustible",
+    "Error  de navegacion con desviacion significativa de la ruta",
+    "Casi colision (RESOLUCION ACVSORY-RA)",
+    "Despegue abortado(REJETED TAKE OFF-RTO)",
+    "Falla de motor",
+    "Tail Strike",
+    "Impacto con aves",
+    "Aterrizaje fuerte (HARD LANDING)",
+    "Alerta de fuego o humo",
+    "Wind Shear",
+    " El avion es evacuado",
+    " Fallo en los controles de vuelo",
+    "Parametros de vuelo anormales",
+  ];
   const onSubmit = form.handleSubmit((values) => {
     console.log(values);
   });
 
   return (
-    <Card className="flex-shrink overflow-auto m-6 bg-slate-50 h-full ">
+    <Card className=" flex flex-col w-1/5 flex-shrink overflow-auto m-6 bg-slate-50 ">
       <CardTitle className=" m-2 text-lg text-center">
         Formulario de reporte de suceso obligatorio
       </CardTitle>
@@ -106,6 +126,13 @@ function FormComponent() {
             form={form}
             name="alternate_destination"
             title="Destino alterno del vuelo"
+          />
+          <CheckBox
+            form={form}
+            title="Marque los sucesos ocurridos"
+            name="incident"
+            label="label"
+            options={optionsList}
           />
           <form onSubmit={onSubmit} className="space-y-4">
             <Button className="w-full mt-4" type="submit">
