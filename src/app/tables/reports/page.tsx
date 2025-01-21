@@ -1,6 +1,7 @@
 "use client";
 
-import * as React from "react";
+import Image from "next/image";
+
 import {
   ColumnFiltersState,
   SortingState,
@@ -42,7 +43,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
 import VoluntaryForm from "@/components/VoluntaryForm";
+import React from "react";
 
 export default function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
