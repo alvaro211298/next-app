@@ -44,18 +44,18 @@ export default function CheckBox<T extends FieldValues>({
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-col space-y-2 rounded-md border p-4 ">
+        <FormItem className="flex flex-col space-y-6 rounded-md border p-4 ">
           <FormLabel className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
             {label}
           </FormLabel>
           {options.map((option) => (
             <FormControl key={option}>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 ">
                 <Checkbox
                   checked={selectedOptions.includes(option)}
                   onCheckedChange={() => handleCheckboxChange(option)}
                 />
-                <FormLabel className=" text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                <FormLabel className=" text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ">
                   {option}
                 </FormLabel>
               </div>

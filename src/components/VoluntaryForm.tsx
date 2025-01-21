@@ -43,13 +43,13 @@ function FormComponent() {
   });
 
   return (
-    <Card className="flex-shrink overflow-auto bg-orange-500 h-full">
+    <Card className=" flex-shrink h-1/2 overflow-auto mt-10 mb-10">
       <CardTitle className=" m-2 text-lg text-center">
         Formulario de reporte voluntario
       </CardTitle>
-      <CardContent className="mt-10">
+      <CardContent className="mt-10 ">
         <Form {...form}>
-          <form onSubmit={onSubmit} className="space-y-4">
+          <form onSubmit={onSubmit} className=" space-y-4">
             <DatePicker
               form={form}
               name="identification_date"

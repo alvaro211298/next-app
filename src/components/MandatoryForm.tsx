@@ -67,11 +67,11 @@ function FormComponent() {
   });
 
   return (
-    <Card className=" flex flex-col w-1/5 flex-shrink overflow-auto m-6 bg-slate-50 ">
+    <Card className=" flex flex-col w-1/5 h-screen flex-shrink overflow-auto m-6 bg-slate-50 ">
       <CardTitle className=" m-2 text-lg text-center">
         Formulario de reporte de suceso obligatorio
       </CardTitle>
-      <CardContent className="mt-10">
+      <CardContent className="mt-10 space-y-6">
         <Form {...form}>
           <DatePicker
             form={form}

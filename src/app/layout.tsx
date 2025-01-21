@@ -7,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body className="flex flex-col justify-center items-center">
+      <body className="flex flex-col max-h-screen overflow-auto items-center">
         {children}
       </body>
     </html>
