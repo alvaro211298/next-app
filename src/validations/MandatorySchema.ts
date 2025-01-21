@@ -36,7 +36,7 @@ const mandatorySchema = z.object({
   flight_origin: z.string(),
   flight_destination: z.string(),
   alternate_destination: z.string(),
-
+  incident: z.array(z.string()),
   /*
   
 
