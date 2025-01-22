@@ -60,11 +60,7 @@ function FormComponent() {
               name="report_date"
               title="Fecha del reporte"
             />
-            <SelectOption
-              form={form}
-              name="selectedArea"
-              title="Area afectada"
-            />
+
             <TextInput
               form={form}
               name="danger_place"

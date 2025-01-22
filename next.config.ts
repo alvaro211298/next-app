@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
 // next.config.js
 module.exports = {
   images: {
-    domains: ["imagenes.elpais.com"],
+    domains: ["imagenes.elpais.com", "media.gettyimages.com"],
   },
 };
 
