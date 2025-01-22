@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import VoluntaryForm from "@/components/VoluntaryForm";
+import Image from "next/image";
 
 // Definición del tipo Payment
 export type Payment = {
@@ -20,6 +21,7 @@ export type Payment = {
   area: "Mantenimiento" | "Operaciones" | "Control" | "Calidad";
   identification_area: string;
   description: string;
+  image: string;
 };
 
 const handleClick = () => {
@@ -66,6 +68,18 @@ export const columns: ColumnDef<Payment>[] = [
     ),
   },
   {
+    accessorKey: "image",
+    header: "Imagen",
+    cell: ({ row }) => (
+      <Image
+        src={row.getValue("image")} // URL directa de la imagen
+        alt="Descripción de la imagen" // Descripción alternativa
+        width={210} // Ancho de la imagen
+        height={10} // Alto de la imagen
+      />
+    ),
+  },
+  {
     accessorKey: "status",
     header: ({ column }) => {
       return (
@@ -78,10 +92,12 @@ export const columns: ColumnDef<Payment>[] = [
         </Button>
       );
     },
+
     cell: ({ row }) => (
       <div className="lowercase text-center">{row.getValue("status")}</div>
     ),
   },
+
   {
     id: "actions",
     enableHiding: false,

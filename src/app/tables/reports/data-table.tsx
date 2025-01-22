@@ -10,6 +10,8 @@ export const data: Payment[] = [
     area: "Control",
     identification_area: "Hangar1",
     description: "Primer problema",
+    image:
+      "https://imagenes.elpais.com/resizer/v2/PQWWIJMQLJEX7AB4OQMLO2XFIQ.jpg?auth=9dc6ff54cd645a2d008e0dbcf86c2ba00baf1ee158cf0472da64972ccdb49e5b&width=1200",
   },
   {
     id: "2",
@@ -19,6 +21,8 @@ export const data: Payment[] = [
     area: "Control",
     identification_area: "Hangar2",
     description: "Segundo problema",
+    image:
+      "https://imagenes.elpais.com/resizer/v2/PQWWIJMQLJEX7AB4OQMLO2XFIQ.jpg?auth=9dc6ff54cd645a2d008e0dbcf86c2ba00baf1ee158cf0472da64972ccdb49e5b&width=1200",
   },
   {
     id: "3",
@@ -28,6 +32,8 @@ export const data: Payment[] = [
     area: "Mantenimiento",
     identification_area: "Hangar3",
     description: "Tercer problema",
+    image:
+      "https://imagenes.elpais.com/resizer/v2/PQWWIJMQLJEX7AB4OQMLO2XFIQ.jpg?auth=9dc6ff54cd645a2d008e0dbcf86c2ba00baf1ee158cf0472da64972ccdb49e5b&width=1200",
   },
   {
     id: "4",
@@ -37,6 +43,8 @@ export const data: Payment[] = [
     area: "Control",
     identification_area: "Hangar4",
     description: "Cuarto problema",
+    image:
+      "https://imagenes.elpais.com/resizer/v2/PQWWIJMQLJEX7AB4OQMLO2XFIQ.jpg?auth=9dc6ff54cd645a2d008e0dbcf86c2ba00baf1ee158cf0472da64972ccdb49e5b&width=1200",
   },
   {
     id: "5",
@@ -46,5 +54,7 @@ export const data: Payment[] = [
     area: "Control",
     identification_area: "Hangar5",
     description: "Quinto problema",
+    image:
+      "https://imagenes.elpais.com/resizer/v2/PQWWIJMQLJEX7AB4OQMLO2XFIQ.jpg?auth=9dc6ff54cd645a2d008e0dbcf86c2ba00baf1ee158cf0472da64972ccdb49e5b&width=1200",
   },
 ];
