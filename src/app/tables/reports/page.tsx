@@ -190,6 +190,7 @@ export default function DataTableDemo() {
             </Button>
           </div>
         </div>
+
         <Card className="flex">
           <Dialog>
             <DialogTrigger asChild>

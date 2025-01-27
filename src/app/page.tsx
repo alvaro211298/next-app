@@ -1,41 +1,127 @@
-"use client";
-import Image from "next/image";
-import formSchema from "@/validations/voluntarySchema";
-import { zodResolver } from "@hookform/resolvers/zod";
+"use client"
 
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
-export default function Home() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+import { toast } from "@/components/hooks/use-toast"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
 
+const items = [
+  {
+    id: "recents",
+    label: "Recents",
+  },
+  {
+    id: "home",
+    label: "Home",
+  },
+  {
+    id: "applications",
+    label: "Applications",
+  },
+  {
+    id: "desktop",
+    label: "Desktop",
+  },
+  {
+    id: "downloads",
+    label: "Downloads",
+  },
+  {
+    id: "documents",
+    label: "Documents",
+  },
+] as const
+
+const FormSchema = z.object({
+  items: z.array(z.string()).refine((value) => value.some((item) => item), {
+    message: "You have to select at least one item.",
+  }),
+})
+
+export function CheckboxReactHookFormMultiple() {
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: "",
-      last_name: "",
-      phone: "",
-      email: "",
-      danger_place: "",
-      anonymous: false, // Añade este valor predeterminado
+      items: ["recents", "home"],
     },
-  });
+  })
 
-  const onSubmit = form.handleSubmit((values) => {
-    console.log(values);
-  });
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    })
+  }
 
   return (
-    <>
-      Home return (
-      <div>
-        <h1>Imagen desde Getty Images en Next.js</h1>
-        <Image
-          src="https://imagenes.elpais.com/resizer/v2/PQWWIJMQLJEX7AB4OQMLO2XFIQ.jpg?auth=9dc6ff54cd645a2d008e0dbcf86c2ba00baf1ee158cf0472da64972ccdb49e5b&width=1200" // URL directa de la imagen
-          alt="Descripción de la imagen" // Descripción alternativa
-          width={210} // Ancho de la imagen
-          height={10} // Alto de la imagen
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="items"
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Sidebar</FormLabel>
+                <FormDescription>
+                  Select the items you want to display in the sidebar.
+                </FormDescription>
+              </div>
+              {items.map((item) => (
+                <FormField
+                  key={item.id}
+                  control={form.control}
+                  name="items"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={item.id}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(item.id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, item.id])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== item.id
+                                    )
+                                  )
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                          {item.label}
+                        </FormLabel>
+                      </FormItem>
+                    )
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
-    </>
-  );
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+  )
 }

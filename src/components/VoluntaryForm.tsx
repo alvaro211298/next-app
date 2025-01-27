@@ -10,7 +10,6 @@ import voluntarySchema, {
 } from "@/validations/voluntarySchema";
 import { DefaultValues } from "react-hook-form";
 import { FormProvider, useFormContext } from "./context/GenericFormContex";
-import SelectOption from "./SelectOption";
 import TextArea from "./TextArea";
 import { useState } from "react";
 

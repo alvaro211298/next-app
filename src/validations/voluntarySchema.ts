@@ -26,25 +26,3 @@ const voluntarySchema = z.object({
 export type VoluntarySchema = z.infer<typeof voluntarySchema>;
 
 export default voluntarySchema;
-
-//Schemas para el formulario del análisis
-/*
-const analysisSchema = z.object({
-  probability: z.enum([
-    "frequent",
-    "occasional",
-    "remote",
-    "unlikely",
-    "highly_unlikely",
-  ]),
-  severity: z.enum([
-    "insignificant",
-    "minor",
-    "major",
-    "dangerous",
-    "catastrophic",
-  ]),
-});
-
-export type AnalysisSchema = z.infer<typeof analysisSchema>;
-*/

@@ -1,13 +1,4 @@
-"use client "; /*
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-*/
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,13 +45,18 @@ export default function DownMenu() {
       </DropdownMenu>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="min-h-80 bg-blue-600">
+        <DialogContent
+          aria-describedby="dialog-description"
+          className="min-h-80 bg-blue-600"
+        >
           <DialogHeader>
             <DialogTitle>
               {typeof dialogContent === "string" ? dialogContent : "Formulario"}
             </DialogTitle>
           </DialogHeader>
-          {typeof dialogContent !== "string" && dialogContent}
+          <div id="dialog-description">
+            {typeof dialogContent !== "string" && dialogContent}
+          </div>
         </DialogContent>
       </Dialog>
     </>

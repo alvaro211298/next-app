@@ -7,13 +7,6 @@ import { Form } from "@/components/ui/form";
 import { DefaultValues } from "react-hook-form";
 import { FormProvider, useFormContext } from "./context/GenericFormContex";
 
-import { DatePicker } from "./DatePicker";
-import mandatorySchema, {
-  MandatorySchema,
-} from "@/validations/MandatorySchema";
-import TextInput from "./TextInput";
-import { TimePicker } from "./TimePicker";
-import CheckBox from "./CheckBox";
 import analysisSchema, { AnalysisSchema } from "@/validations/AnalysisSchema";
 import SelectOption from "./SelectOption";
 
@@ -52,7 +45,7 @@ function FormComponent() {
   });
 
   return (
-    <Card className=" flex flex-col w-1/5 h-screen flex-shrink overflow-auto m-6 bg-slate-50 ">
+    <Card className=" flex flex-col justify-center items-center w-1/5 h-80 flex-shrink overflow-auto m-6 bg-slate-50 ">
       <CardTitle className=" m-2 text-lg text-center">
         Formulario para el analisis de peligro
       </CardTitle>

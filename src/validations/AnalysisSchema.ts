@@ -15,11 +15,6 @@ enum Severity {
   Minor = "Leve",
   Insignificant = "Insignificante",
 }
-enum Result {
-  Acceptable = "Aceptable",
-  Tolerable = "Tolerable",
-  Intolerable = "Intolerable",
-}
 
 const analysisSchema = z.object({
   probability: z.enum([
@@ -37,10 +32,6 @@ const analysisSchema = z.object({
     Severity.Dangerous,
     Severity.Catastrophic,
   ]),
-
-  /*
-  result: z.enum([Result.Acceptable, Result.Tolerable, Result.Intolerable]),
-  */
 });
 
 export type AnalysisSchema = z.infer<typeof analysisSchema>;
