@@ -29,6 +29,10 @@ export default function DownMenu() {
     setDialogOpen(true);
   };
 
+  const handleClik = () => {
+    console.log("click");
+  };
+
   return (
     <>
       <DropdownMenu>
@@ -42,9 +46,7 @@ export default function DownMenu() {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Aceptar reporte</DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => handleOpenDialog(<RedirectionForm />)}
-          >
+          <DropdownMenuItem onClick={() => setDialogOpen(true)}>
             Redirigir reporte
           </DropdownMenuItem>
           <DropdownMenuItem>Eliminar reporte</DropdownMenuItem>
@@ -55,20 +57,13 @@ export default function DownMenu() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="text-center">
-              ¿Seguro que desea aprobar la cotizacion?
+              Redireccion a otro depatamento
             </DialogTitle>
             <DialogDescription className="text-center p-2 mb-0 pb-0">
-              Será aprobada tanto la cotizacion como la requisicion adjunta.
+              El reporte sera redirigido a otro departamento que le corresponda
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="flex gap-2">
-            <Button className="bg-rose-400 hover:bg-white hover:text-black hover:border hover:border-black">
-              Cancelar
-            </Button>
-            <Button className="hover:bg-white hover:text-black hover:border hover:border-black transition-all">
-              Aceptar
-            </Button>
-          </DialogFooter>
+          <RedirectionForm></RedirectionForm>
         </DialogContent>
       </Dialog>
     </>

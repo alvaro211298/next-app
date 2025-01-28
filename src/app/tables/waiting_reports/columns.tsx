@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import DownMenu from "@/components/DownMenu";
+import DrownMenuA from "@/components/DrownMenuA";
 
 // Definición del tipo Payment
 export type Payment = {
@@ -13,7 +14,6 @@ export type Payment = {
   identification_area: string;
   description: string;
 };
-
 
 export const columns: ColumnDef<Payment>[] = [
   {
@@ -71,7 +71,7 @@ export const columns: ColumnDef<Payment>[] = [
       const payment = row.original;
       return (
         <>
-          <DownMenu />
+          <DrownMenuA />
         </>
       );
     },
