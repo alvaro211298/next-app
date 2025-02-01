@@ -19,6 +19,8 @@ import {
 } from "./ui/dialog";
 import { JSX, useState } from "react";
 import RedirectionForm from "./RedirectionForm";
+import TrackingForm from "./TrackingForm";
+import MitigationMeasureForm from "./MitigationMeasureForm";
 
 export default function DownMenu() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -33,6 +35,9 @@ export default function DownMenu() {
     console.log("click");
   };
 
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
   return (
     <>
       <DropdownMenu>
@@ -63,7 +68,7 @@ export default function DownMenu() {
               El reporte sera redirigido a otro departamento que le corresponda
             </DialogDescription>
           </DialogHeader>
-          <RedirectionForm></RedirectionForm>
+          <MitigationMeasureForm onClose={() => setDialogOpen(false)} />
         </DialogContent>
       </Dialog>
     </>

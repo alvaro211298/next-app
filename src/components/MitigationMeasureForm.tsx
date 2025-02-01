@@ -18,6 +18,7 @@ import { z } from "zod";
 import { CalendarIcon } from "lucide-react";
 import { es } from "date-fns/locale";
 
+import { useState } from "react";
 import {
   Popover,
   PopoverContent,
@@ -25,13 +26,18 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
+import { format, min } from "date-fns";
 
 import { Separator } from "@radix-ui/react-select";
 
 const FormSchema = z.object({
   description: z.string().min(5),
-  date: z
+  monitoring_officer: z.string().min(5),
+  implementation_officer: z.string().min(5),
+  estimated_date: z
+    .date()
+    .refine((val) => !isNaN(val.getTime()), { message: "Invalid Date" }),
+  execution_date: z
     .date()
     .refine((val) => !isNaN(val.getTime()), { message: "Invalid Date" }),
 });
@@ -41,14 +47,14 @@ type FormSchemaType = z.infer<typeof FormSchema>;
 interface FormProps {
   onClose: () => void;
 }
-// { onClose }: FormProps
-// lo de arriba va en prop
-export default function RedirectionForm({ onClose }: FormProps) {
+
+export default function VoluntaryReportForm({onClose}: FormProps) {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       description: "",
-      date: new Date(),
+      monitoring_officer: "",
+      implementation_officer: "",
     },
   });
 
@@ -64,7 +70,7 @@ export default function RedirectionForm({ onClose }: FormProps) {
         className="flex flex-col space-y-3"
       >
         <FormLabel className="text-lg text-center m-2">
-          Formulario de redirección de reporte
+          Medida a implementar
         </FormLabel>
 
         <FormField
@@ -72,21 +78,49 @@ export default function RedirectionForm({ onClose }: FormProps) {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Descripcion</FormLabel>
+              <FormLabel>Descripcion de la medida</FormLabel>
               <FormControl>
-                <Input placeholder="Descripcion " {...field} />
+                <Input placeholder="Descripcion de la medida" {...field} />
               </FormControl>
               <FormMessage className="text-xs" />
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
-          name="date"
+          name="implementation_officer"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Encargado de la implementación</FormLabel>
+              <FormControl>
+                <Input placeholder="Quien implementara la medida" {...field} />
+              </FormControl>
+              <FormMessage className="text-xs" />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="monitoring_officer"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Encargado del seguimiento</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Quien se encarga de supervisar"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage className="text-xs" />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="estimated_date"
           render={({ field }) => (
             <FormItem className="flex flex-col mt-2.5">
-              <FormLabel>Fecha de redirección</FormLabel>
+              <FormLabel>Fecha estimada de ejecución</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -126,6 +160,50 @@ export default function RedirectionForm({ onClose }: FormProps) {
           )}
         />
 
+        <FormField
+          control={form.control}
+          name="execution_date"
+          render={({ field }) => (
+            <FormItem className="flex flex-col mt-2.5">
+              <FormLabel>Fecha de ejecución</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-[240px] pl-3 text-left font-normal",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      {field.value ? (
+                        format(field.value, "PPP", {
+                          locale: es,
+                        })
+                      ) : (
+                        <span>Seleccione una fecha...</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    disabled={(date) =>
+                      date > new Date() || date < new Date("1900-01-01")
+                    }
+                    initialFocus
+                    locale={es}
+                  />
+                </PopoverContent>
+              </Popover>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <div className="flex justify-between items-center gap-x-4">
           <Separator className="flex-1" />
           <p className="text-muted-foreground">SIGEAC</p>

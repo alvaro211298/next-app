@@ -18,6 +18,7 @@ import { z } from "zod";
 import { CalendarIcon } from "lucide-react";
 import { es } from "date-fns/locale";
 
+import { useState } from "react";
 import {
   Popover,
   PopoverContent,
@@ -43,7 +44,7 @@ interface FormProps {
 }
 // { onClose }: FormProps
 // lo de arriba va en prop
-export default function RedirectionForm({ onClose }: FormProps) {
+export default function VoluntaryReportForm({ onClose }: FormProps) {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -63,16 +64,14 @@ export default function RedirectionForm({ onClose }: FormProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col space-y-3"
       >
-        <FormLabel className="text-lg text-center m-2">
-          Formulario de redirección de reporte
-        </FormLabel>
+        <FormLabel className="text-lg text-center m-2">Seguimiento</FormLabel>
 
         <FormField
           control={form.control}
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Descripcion</FormLabel>
+              <FormLabel>Descripcion del seguimiento</FormLabel>
               <FormControl>
                 <Input placeholder="Descripcion " {...field} />
               </FormControl>
@@ -86,7 +85,7 @@ export default function RedirectionForm({ onClose }: FormProps) {
           name="date"
           render={({ field }) => (
             <FormItem className="flex flex-col mt-2.5">
-              <FormLabel>Fecha de redirección</FormLabel>
+              <FormLabel>Fecha de seguimiento</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
